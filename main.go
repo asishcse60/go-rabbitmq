@@ -18,6 +18,11 @@ func Run() error{
 	if err != nil{
 		return err
 	}
+	defer app.Rmq.Conn.Close()
+	err = app.Rmq.Publish("Hello boys")
+	if err != nil{
+		return err
+	}
 	return nil
 }
 func main() {
