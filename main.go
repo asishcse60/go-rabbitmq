@@ -23,6 +23,7 @@ func Run() error{
 	if err != nil{
 		return err
 	}
+	app.Rmq.Consume()
 	return nil
 }
 func main() {

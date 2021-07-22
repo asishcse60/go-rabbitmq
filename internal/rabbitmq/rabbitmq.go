@@ -46,6 +46,17 @@ func (rmq *RabbitMQ) Publish(message string)error  {
 	fmt.Println("Successfully published message to queue")
 	return nil
 }
+
+func (rmq *RabbitMQ) Consume() {
+	megs,err:= rmq.Channel.Consume("TestQueue","", true, false, false, false, nil)
+	if err!=nil{
+		fmt.Println(err)
+		return
+	}
+	for msg:= range megs {
+		fmt.Printf("Received message: %s\n", msg.Body)
+	}
+}
 func NewRabbitMqService() *RabbitMQ {
 	return &RabbitMQ{}
 }
